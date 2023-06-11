@@ -5,5 +5,4 @@ def replace_in_list(my_list, idx, element):
         return None
     else:
         my_list[idx] = element
-        for i in range(0, len(my_list)):
-            print("{:d}".format(my_list[i]))
+        return my_list
