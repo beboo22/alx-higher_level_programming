@@ -1,15 +1,10 @@
 #!/usr/bin/python3
-"""
-Defines a class Rectangle
-"""
-
-
 class Rectangle:
     """Representation of a rectangle"""
     def __init__(self, width=0, height=0):
         """Initializes the rectangle"""
-        self.width = width
         self.height = height
+        self.width = width
 
     @property
     def width(self):
@@ -47,4 +42,5 @@ class Rectangle:
         """returns the perimeter of the rectangle"""
         if self.__width == 0 or self.__height == 0:
             return 0
-        return (self.__width * 2) + (self.__height * 2)
+        else:
+            return (self.__width * 2) + (self.__height * 2)
