@@ -12,6 +12,7 @@ def read_file(filename=""):
         Exception: when the file can be opened
 
     """
+    
     with open(filename, 'r', encoding="UTF8") as f:
         r_data = read(filename)
         print(filename, end='')
