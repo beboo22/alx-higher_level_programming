@@ -116,9 +116,44 @@ class Rectangle(Base):
         return (self.__width * self.__height)
 
     def display(self):
-        hsh=""
+        hsh = ""
         for i in range(self.height):
             print("#" * self.width+"")
-            
-            
-            
+
+    def __str__(self):
+        """
+            returns a string formart of the rectangle
+        """
+        return "[{}] ({}) {}/{} - {}/{}".format(type(self).__name__, self.id,
+                                                self.__x, self.__y,
+                                                self.__width, self.__height)
+
+    def update(self, *args, **kwargs):
+        """
+            assigns key/value argument to attributes
+            kwargs is skipped if args is not empty
+            Args:
+                *args -  variable number of no-keyword args
+                **kwargs - variable number of keyworded args
+        """
+        if len(args) == 0:
+            for key, val in kwargs.items():
+                self.__setattr__(key, val)
+            return
+
+        try:
+            self.id = args[0]
+            self.width = args[1]
+            self.height = args[2]
+            self.x = args[3]
+            self.y = args[4]
+        except IndexError:
+            pass
+
+    def to_dictionary(self):
+        """
+            returns the dictionary repr of a rect
+        """
+        return {'x': getattr(self, "x"), 'y': getattr(self, "y"),
+                'id': getattr(self, "id"), 'height': getattr(self, "height"),
+                'width': getattr(self, "width")}
