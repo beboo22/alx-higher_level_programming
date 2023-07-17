@@ -116,9 +116,23 @@ class Rectangle(Base):
         return (self.__width * self.__height)
 
     def display(self):
-        hsh = ""
+        """
+            prints to stdout the Rectangle instance with '#'
+        """
+        rectangle = ""
+        print_symbol = "#"
+
+#        for i in range(self.__height - 1):
+#            rectangle += print_symbol * self.__width + "\n"
+#        rectangle += print_symbol * self.__width
+
+#        print("{}".format(rectangle))
+
+        print("\n" * self.y, end="")
+
         for i in range(self.height):
-            print("#" * self.width+"")
+            rectangle += (" " * self.x) + (print_symbol*self.width) + "\n"
+        print(rectangle, end="")
 
     def __str__(self):
         """
