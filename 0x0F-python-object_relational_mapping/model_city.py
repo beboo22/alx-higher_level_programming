@@ -1,22 +1,26 @@
 #!/usr/bin/python3
-# Lists all City objects from the database hbtn_0e_14_usa.
-# Usage: ./14-model_city_fetch_by_state.py <mysql username> /
-#                                          <mysql password> /
-#                                          <database name>
-import sys
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from model_state import State
-from model_city import City
+"""
+This script defines a State class and
+a Base class to work with MySQLAlchemy ORM.
+"""
 
-if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 
-    for city, state in session.query(City, State) \
-                              .filter(City.state_id == State.id) \
-                              .order_by(City.id):
-        print("{}: ({}) {}".format(state.name, city.id, city.name))
+Base = declarative_base()
+
+
+class City(Base):
+    """City class
+
+    Attributes:
+        __tablename__ (str): The table name of the class
+        id (int): The City id of the class
+        name (str): The City name of the class
+
+    """
+    __tablename__ = 'cities'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(128), nullable=False)
+    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
