@@ -19,6 +19,7 @@ class State(Base):
         name (str): The State name of the class
 
     """
-    __tablename__ = 'States'
+    __tablename__ = 'states'
+
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
