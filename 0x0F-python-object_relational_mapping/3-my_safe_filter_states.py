@@ -11,10 +11,9 @@ if __name__ == '__main__':
     username, password, database = argv[1], argv[2], argv[3]
     db = MySQLdb.connect(host="localhost", port=3306,
                          user=username, passwd=password, db=database)
-    query = "SELECT * FROM states"
+    query = "SELECT * FROM states WHERE name = %(name)s ORDER BY states.id ASC"
     cur = db.cursor()
-    cur.execute(query)
+    cur.execute(query, {'name': argv[4]})
     res = cur.fetchall()
     for row in res:
-        if(row[1] == argv[4]):
-            print(row)
+        print(row)
